@@ -1,9 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('/admin', 'admin.dashboard.index');
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login'])->name('login.post');
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::group(['prefix'  =>  'admin', 'middleware' => ['auth', 'admin']], function () {
+
+    Route::get('/', function () {
+        return view('admin.dashboard.index');
+    });
+
+});
