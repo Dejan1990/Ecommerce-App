@@ -62,7 +62,7 @@
             </a>
             <ul class="dropdown-menu settings-menu dropdown-menu-right">
                 <li>
-                    <a class="dropdown-item" href="page-user.html">
+                    <a class="dropdown-item" href="{{ route('admin.settings') }}">
                         <i class="fa fa-cog fa-lg"></i> Settings
                     </a>
                 </li>
