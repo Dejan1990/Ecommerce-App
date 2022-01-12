@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\SettingController;
@@ -20,5 +21,16 @@ Route::group(['prefix'  =>  'admin', 'middleware' => ['auth', 'admin']], functio
 
     Route::get('/settings', [SettingController::class, 'index'])->name('admin.settings');
     Route::post('/settings', [SettingController::class, 'update'])->name('admin.settings.update');
+
+    Route::group(['prefix'  =>   'categories'], function() {
+
+        Route::get('/', [CategoryController::class, 'index'])->name('admin.categories.index');
+        Route::get('/create', [CategoryController::class, 'create'])->name('admin.categories.create');
+        Route::post('/store', [CategoryController::class, 'store'])->name('admin.categories.store');
+        Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
+        Route::post('/update', [CategoryController::class, 'update'])->name('admin.categories.update');
+        Route::get('/{id}/delete', [CategoryController::class, 'delete'])->name('admin.categories.delete');
+    
+    });
 
 });
