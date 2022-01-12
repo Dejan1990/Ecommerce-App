@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Database\Seeders\SettingSeeder;
+use Database\Seeders\CategorySeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,6 +28,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'lucy@mail.com'
         ]);
 
-        $this->call(SettingSeeder::class);
+        $this->call([
+            SettingSeeder::class,
+            CategorySeeder::class
+        ]);
     }
 }
