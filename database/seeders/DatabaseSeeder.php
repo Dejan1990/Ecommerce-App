@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\SettingSeeder;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\AttributesTableSeeder;
+use Database\Seeders\AttributeValuesTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -34,7 +35,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SettingSeeder::class,
             CategorySeeder::class,
-            AttributesTableSeeder::class
+            AttributesTableSeeder::class,
+            AttributeValuesTableSeeder::class
         ]);
     }
 }

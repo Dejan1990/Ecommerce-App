@@ -15,10 +15,10 @@ class CreateAttributeValuesTable extends Migration
     {
         Schema::create('attribute_values', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('attribute_id')->constrained();
+            $table->foreignId('attribute_id')->constrained()->onDelete('cascade');
             //$table->foreign('attribute_id')->references('id')->on('attributes');
             $table->text('value');
-            $table->decimal('price', 2)->nullable();
+            $table->decimal('price', 5, 2)->nullable();
             $table->timestamps();
         });
     }

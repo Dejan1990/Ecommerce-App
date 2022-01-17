@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\AttributeValueController;
 use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -42,6 +43,11 @@ Route::group(['prefix'  =>  'admin', 'middleware' => ['auth', 'admin']], functio
         Route::get('/{id}/edit', [AttributeController::class, 'edit'])->name('admin.attributes.edit');
         Route::post('/update', [AttributeController::class, 'update'])->name('admin.attributes.update');
         Route::get('/{id}/delete', [AttributeController::class, 'delete'])->name('admin.attributes.delete');
+
+        Route::post('/get-values', [AttributeValueController::class, 'getValues']);
+        Route::post('/add-values', [AttributeValueController::class, 'addValues']);
+        Route::post('/update-values', [AttributeValueController::class, 'updateValues']);
+        Route::post('/delete-values', [AttributeValueController::class, 'deleteValues']);
     
     });
 
