@@ -10,15 +10,15 @@ class ProductAttribute extends Model
     use HasFactory;
 
     protected $table = 'product_attributes';
-    protected $fillable = ['product_id', 'quantity', 'price'];
+    protected $fillable = ['attribute_id', 'product_id', 'value', 'quantity', 'price'];
 
     public function product()
     {
         return $this->belongsTo(Product::class);
     }
 
-    public function attributesValues()
+    public function attribute()
     {
-        return $this->belongsToMany(AttributeValue::class);
+        return $this->belongsTo(Attribute::class);
     }
 }
