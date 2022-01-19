@@ -10,7 +10,7 @@ class ProductImage extends Model
     use HasFactory;
 
     protected $table = 'product_images';
-    protected $fillable = ['product_id', 'thumbnail', 'full'];
+    protected $fillable = ['product_id', 'full'];
 
     protected $casts = [
         'product_id'    =>  'integer',

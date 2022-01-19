@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AttributeValueController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductImageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\SettingController;
@@ -72,6 +73,9 @@ Route::group(['prefix'  =>  'admin', 'middleware' => ['auth', 'admin']], functio
         Route::post('/store', [ProductController::class, 'store'])->name('admin.products.store');
         Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('admin.products.edit');
         Route::post('/update', [ProductController::class, 'update'])->name('admin.products.update');
+
+        Route::post('images/upload', [ProductImageController::class, 'upload'])->name('admin.products.images.upload');
+        Route::get('images/{id}/delete', [ProductImageController::class, 'delete'])->name('admin.products.images.delete');
      
      });
 
