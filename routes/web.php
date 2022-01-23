@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\ProductImageController;
@@ -19,6 +18,8 @@ Route::post('login', [LoginController::class, 'login'])->name('login.post');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/category/{slug}', [\App\Http\Controllers\Site\CategoryController::class, 'show'])->name('category.show');
+
+Route::get('/product/{slug}', [\App\Http\Controllers\Site\ProductController::class, 'show'])->name('product.show');
 
 /* Admin */
 Route::group(['prefix'  =>  'admin', 'middleware' => ['auth', 'admin']], function () {
@@ -70,11 +71,11 @@ Route::group(['prefix'  =>  'admin', 'middleware' => ['auth', 'admin']], functio
 
     Route::group(['prefix' => 'products'], function () {
 
-        Route::get('/', [ProductController::class, 'index'])->name('admin.products.index');
-        Route::get('/create', [ProductController::class, 'create'])->name('admin.products.create');
-        Route::post('/store', [ProductController::class, 'store'])->name('admin.products.store');
-        Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('admin.products.edit');
-        Route::post('/update', [ProductController::class, 'update'])->name('admin.products.update');
+        Route::get('/', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('admin.products.index');
+        Route::get('/create', [\App\Http\Controllers\Admin\ProductController::class, 'create'])->name('admin.products.create');
+        Route::post('/store', [\App\Http\Controllers\Admin\ProductController::class, 'store'])->name('admin.products.store');
+        Route::get('/edit/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'edit'])->name('admin.products.edit');
+        Route::post('/update', [\App\Http\Controllers\Admin\ProductController::class, 'update'])->name('admin.products.update');
 
         Route::post('images/upload', [ProductImageController::class, 'upload'])->name('admin.products.images.upload');
         Route::get('images/{id}/delete', [ProductImageController::class, 'delete'])->name('admin.products.images.delete');
