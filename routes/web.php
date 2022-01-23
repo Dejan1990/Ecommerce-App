@@ -1,15 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\AttributeController;
-use App\Http\Controllers\Admin\AttributeValueController;
-use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ProductAttributeController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\ProductImageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\ProductImageController;
+use App\Http\Controllers\Admin\AttributeValueController;
+use App\Http\Controllers\Admin\ProductAttributeController;
 
 Route::view('/', 'site.pages.homepage');
 
@@ -19,6 +18,9 @@ Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login'])->name('login.post');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
+Route::get('/category/{slug}', [\App\Http\Controllers\Site\CategoryController::class, 'show'])->name('category.show');
+
+/* Admin */
 Route::group(['prefix'  =>  'admin', 'middleware' => ['auth', 'admin']], function () {
 
     Route::get('/', function () {
@@ -30,12 +32,12 @@ Route::group(['prefix'  =>  'admin', 'middleware' => ['auth', 'admin']], functio
 
     Route::group(['prefix'  =>   'categories'], function() {
 
-        Route::get('/', [CategoryController::class, 'index'])->name('admin.categories.index');
-        Route::get('/create', [CategoryController::class, 'create'])->name('admin.categories.create');
-        Route::post('/store', [CategoryController::class, 'store'])->name('admin.categories.store');
-        Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
-        Route::post('/update', [CategoryController::class, 'update'])->name('admin.categories.update');
-        Route::get('/{id}/delete', [CategoryController::class, 'delete'])->name('admin.categories.delete');
+        Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('admin.categories.index');
+        Route::get('/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('admin.categories.create');
+        Route::post('/store', [\App\Http\Controllers\Admin\CategoryController::class, 'store'])->name('admin.categories.store');
+        Route::get('/{id}/edit', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('admin.categories.edit');
+        Route::post('/update', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('admin.categories.update');
+        Route::get('/{id}/delete', [\App\Http\Controllers\Admin\CategoryController::class, 'delete'])->name('admin.categories.delete');
     
     });
 
