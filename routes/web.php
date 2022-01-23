@@ -20,6 +20,7 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/category/{slug}', [\App\Http\Controllers\Site\CategoryController::class, 'show'])->name('category.show');
 
 Route::get('/product/{slug}', [\App\Http\Controllers\Site\ProductController::class, 'show'])->name('product.show');
+Route::post('/product/add/cart', [\App\Http\Controllers\Site\ProductController::class, 'addToCart'])->name('product.add.cart');
 
 /* Admin */
 Route::group(['prefix'  =>  'admin', 'middleware' => ['auth', 'admin']], function () {
