@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\AttributeValueController;
 use App\Http\Controllers\Admin\ProductAttributeController;
 use App\Http\Controllers\Site\CartController;
+use App\Http\Controllers\Site\CheckoutController;
 
 Route::view('/', 'site.pages.homepage');
 
@@ -26,6 +27,15 @@ Route::post('/product/add/cart', [\App\Http\Controllers\Site\ProductController::
 Route::get('/cart', [CartController::class, 'getCart'])->name('checkout.cart');
 Route::get('/cart/item/{id}/remove', [CartController::class, 'removeItem'])->name('checkout.cart.remove');
 Route::get('/cart/clear', [CartController::class, 'clearCart'])->name('checkout.cart.clear');
+/*
+Currently we are not attaching the shopping cart to authenticated user. The package we have used to add shopping cart functionality does support the user-specific shopping cart. For that, you have to move the add to cart route and all shopping cart route under the route group which is using the auth middleware.
+I want to keep this series as simple as possible so won’t be going much deep into each and every detail. Check the package documentation for using user-specific shopping carts.
+*/
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/checkout', [CheckoutController::class, 'getCheckout'])->name('checkout.index');
+    Route::post('/checkout/order', [CheckoutController::class, 'placeOrder'])->name('checkout.place.order');
+});
 
 /* Admin */
 Route::group(['prefix'  =>  'admin', 'middleware' => ['auth', 'admin']], function () {

@@ -14,7 +14,7 @@ class AlterProductAttributesTable extends Migration
     public function up()
     {
         Schema::table('product_attributes', function (Blueprint $table) {
-            $table->foreignId('attribute_id')->constrained()->after('id');
+            $table->foreignId('attribute_id')->constrained()->onDelete('cascade')->after('product_id');
             $table->string('value')->after('attribute_id');
         });
     }
