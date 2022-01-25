@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\AttributeValueController;
 use App\Http\Controllers\Admin\ProductAttributeController;
+use App\Http\Controllers\Site\CartController;
 
 Route::view('/', 'site.pages.homepage');
 
@@ -21,6 +22,10 @@ Route::get('/category/{slug}', [\App\Http\Controllers\Site\CategoryController::c
 
 Route::get('/product/{slug}', [\App\Http\Controllers\Site\ProductController::class, 'show'])->name('product.show');
 Route::post('/product/add/cart', [\App\Http\Controllers\Site\ProductController::class, 'addToCart'])->name('product.add.cart');
+
+Route::get('/cart', [CartController::class, 'getCart'])->name('checkout.cart');
+Route::get('/cart/item/{id}/remove', [CartController::class, 'removeItem'])->name('checkout.cart.remove');
+Route::get('/cart/clear', [CartController::class, 'clearCart'])->name('checkout.cart.clear');
 
 /* Admin */
 Route::group(['prefix'  =>  'admin', 'middleware' => ['auth', 'admin']], function () {
