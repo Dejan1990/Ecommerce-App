@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\AttributeValueController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductAttributeController;
 use App\Http\Controllers\Site\AccountController;
 use App\Http\Controllers\Site\CartController;
@@ -50,6 +51,11 @@ Route::group(['prefix'  =>  'admin', 'middleware' => ['auth', 'admin']], functio
 
     Route::get('/settings', [SettingController::class, 'index'])->name('admin.settings');
     Route::post('/settings', [SettingController::class, 'update'])->name('admin.settings.update');
+
+    Route::group(['prefix' => 'orders'], function () {
+        Route::get('/', [OrderController::class, 'index'])->name('admin.orders.index');
+        Route::get('/{order}/show', [OrderController::class, 'show'])->name('admin.orders.show');
+     });
 
     Route::group(['prefix'  =>   'categories'], function() {
 
